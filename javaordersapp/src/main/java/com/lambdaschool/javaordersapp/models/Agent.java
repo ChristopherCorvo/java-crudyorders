@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "agents") // If you were to use a "GET ALL" query you would get back all 'Agent' objects and we
                         // would name it plural because it will be multiple 'Agent' objects.
                         // We are making a series of 'Agent' objects that will be stored in the 'agents' table
-@JsonIgnoreProperties
+
 public class Agent
 {
     // Create Primary Key
@@ -40,19 +40,22 @@ public class Agent
 
     //Constructor with parameters
     // We dont include the primary key in the constructor
+
+
     public Agent(
         String agentname,
         String workingarea,
         double commission,
         String phone,
-        String country
-        )
+        String country)
+
     {
         this.agentname = agentname;
         this.workingarea = workingarea;
         this.commission = commission;
         this.phone = phone;
         this.country = country;
+
     }
 
     // ------------ Getters and Setters ---------

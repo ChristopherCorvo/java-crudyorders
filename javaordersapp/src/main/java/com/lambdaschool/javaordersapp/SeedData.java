@@ -25,7 +25,7 @@ import java.util.Random;
 import java.util.Set;
 
 @Transactional
-//@Component // needs to be commented out in order to use .sql file
+@Component // needs to be commented out in order to use .sql file
 public class SeedData
     implements CommandLineRunner
 {

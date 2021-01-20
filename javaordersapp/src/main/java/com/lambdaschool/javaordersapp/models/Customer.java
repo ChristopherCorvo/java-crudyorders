@@ -8,6 +8,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "customers")
+@JsonIgnoreProperties(value = {"hasvalueforopeningamt",
+    "hasvalueforreceiveamt",
+    "hasvalueforpaymentamt",
+    "hasvalueforoutstandingamt"})
+
 public class Customer
 {
 
@@ -22,10 +27,23 @@ public class Customer
     private String workingarea;
     private String custcountry;
     private String grade;
+
+    @Transient
+    public boolean hasvalueforopeningamt = false;
     private double openingamt;
+
+    @Transient
+    public boolean hasvalueforreceiveamt = false;
     private double receiveamt;
+
+    @Transient
+    public boolean hasvalueforpaymentamt = false;
     private double paymentamt;
+
+    @Transient
+    public boolean hasvalueforoutstandingamt = false;
     private double outstandingamt;
+
     private String phone;
 
     // -------- Association Fields ---------
@@ -145,6 +163,7 @@ public class Customer
 
     public void setOpeningamt(double openingamt)
     {
+        hasvalueforopeningamt = true;
         this.openingamt = openingamt;
     }
 
@@ -155,6 +174,7 @@ public class Customer
 
     public void setReceiveamt(double receiveamt)
     {
+        hasvalueforreceiveamt = true;
         this.receiveamt = receiveamt;
     }
 
@@ -165,6 +185,7 @@ public class Customer
 
     public void setPaymentamt(double paymentamt)
     {
+        hasvalueforpaymentamt = true;
         this.paymentamt = paymentamt;
     }
 
@@ -175,6 +196,7 @@ public class Customer
 
     public void setOutstandingamt(double outstandingamt)
     {
+        hasvalueforoutstandingamt = true;
         this.outstandingamt = outstandingamt;
     }
 
@@ -188,14 +210,26 @@ public class Customer
         this.phone = phone;
     }
 
-    public Agent getAgents()
+    // -------- Association Getters and Setters
+
+    public Agent getAgent()
     {
         return agent;
     }
 
-    public void setAgents(Agent agent)
+    public void setAgent(Agent agent)
     {
         this.agent = agent;
+    }
+
+    public List<Order> getOrders()
+    {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders)
+    {
+        this.orders = orders;
     }
 }
 

@@ -8,6 +8,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orders")
+@JsonIgnoreProperties(value = {"hasvalueforordamount",
+    "hasvalueforadvanceamount"})
 public class Order
 {
     // Generate a unique primary key
@@ -16,8 +18,14 @@ public class Order
     // -------------- Table Fields ------------
     private long ordnum; // primary key
 
+    @Transient
+    public boolean hasvalueforordamount = false;
     private double ordamount;
+
+    @Transient
+    public boolean hasvalueforadvanceamount = false;
     private double advanceamount;
+
     private String orderdescription;
 
     // ----------- Association Fields ---------
@@ -77,6 +85,7 @@ public class Order
 
     public void setOrdamount(double ordamount)
     {
+        hasvalueforordamount = true;
         this.ordamount = ordamount;
     }
 
@@ -87,6 +96,7 @@ public class Order
 
     public void setAdvanceamount(double advanceamount)
     {
+        hasvalueforadvanceamount = true;
         this.advanceamount = advanceamount;
     }
 
@@ -108,16 +118,6 @@ public class Order
     public void setPayments(Set<Payment> payments)
     {
         this.payments = payments;
-    }
-
-    public Customer getCustomers()
-    {
-        return customer;
-    }
-
-    public void setCustomers(Customer customers)
-    {
-        this.customer = customers;
     }
 
     public Customer getCustomer()
